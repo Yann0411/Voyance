@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 
 function ButtonNumber({ number }) {
+  const handleClick = () => {
+    console.log(`je veux changer de nombre ${number}`);
+  };
+
   return (
-    <button type="button">{number}</button>
+    <button onClick={handleClick} type="button">{number}</button>
   );
 }
 
