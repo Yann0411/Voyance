@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ButtonNumber from './buttonNumber';
 
-function Form({ prediction }) {
+function Form({ prediction, setFavoriteNumber, listOfNumber }) {
   return (
     <section>
       <form>
@@ -10,16 +10,11 @@ function Form({ prediction }) {
       </form>
       <div>
         <button type="button">Effacer</button>
-        <ButtonNumber number={0} />
-        <ButtonNumber number={1} />
-        <ButtonNumber number={2} />
-        <ButtonNumber number={3} />
-        <ButtonNumber number={4} />
-        <ButtonNumber number={5} />
-        <ButtonNumber number={6} />
-        <ButtonNumber number={7} />
-        <ButtonNumber number={8} />
-        <ButtonNumber number={9} />
+        {
+          listOfNumber.map((item) => <ButtonNumber key={item.number} setFavoriteNumber={setFavoriteNumber} numero={item.number} />)
+
+        }
+
       </div>
       <p>{prediction}</p>
     </section>
@@ -28,5 +23,9 @@ function Form({ prediction }) {
 
 Form.propTypes = {
   prediction: PropTypes.string.isRequired,
+  setFavoriteNumber: PropTypes.func.isRequired,
+  listOfNumber: PropTypes.arrayOf(PropTypes.shape({
+    number: PropTypes.number.isRequired,
+  })).isRequired,
 };
 export default Form;

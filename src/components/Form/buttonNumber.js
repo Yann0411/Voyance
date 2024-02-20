@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
 
-function ButtonNumber({ number }) {
+function ButtonNumber({ numero, setFavoriteNumber }) {
   const handleClick = () => {
-    console.log(`je veux changer de nombre ${number}`);
+    setFavoriteNumber(numero);
   };
 
   return (
-    <button onClick={handleClick} type="button">{number}</button>
+    <button onClick={handleClick} type="button">{numero}</button>
   );
 }
 
 ButtonNumber.propTypes = {
-  number: PropTypes.number.isRequired,
+  numero: PropTypes.number.isRequired,
+  setFavoriteNumber: PropTypes.func.isRequired,
 };
 
 export default ButtonNumber;

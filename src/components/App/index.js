@@ -8,22 +8,41 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { // j'initialise mon state
-      favouriteNumber: 4,
+      favouriteNumber: false,
     };
+    // this.setFavorite = this.setFavorite.bind(this);
   }
 
   render() {
     const { favouriteNumber } = this.state; // je le lis
     const foundPrediction = data.find((currentValue) => currentValue.number === favouriteNumber);
 
+    let message;
+    if (foundPrediction) {
+      message = foundPrediction.sentence;
+    }
+    else {
+      message = 'Je ne vois rien';
+    }
+
+    // je prepare la fonction qui sait modifier le state
+    const setFavoriteNumber = (newValue) => {
+      this.setState({
+        favouriteNumber: newValue,
+      });
+    };
+
     return (
       <div className="app">
         <Header />
         <Form
-         // je le diffuse via les props pour parametrer mon affichage en fonction de sa valeur 
-          prediction={foundPrediction.sentence}
+         // je diffuse le state via les props pour parametrer mon affichage en fonction de sa valeur
+          prediction={message}
+          // je diffuse ma foonction qui sait modifier le state
+          setFavoriteNumber={setFavoriteNumber}
+          listOfNumber={data}
         />
-        <Infos number={favouriteNumber} />
+        {typeof favouriteNumber === 'number' && <Infos number={favouriteNumber} />}
 
       </div>
     );
