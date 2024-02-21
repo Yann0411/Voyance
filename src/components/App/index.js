@@ -8,15 +8,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { // j'initialise mon state
-      favouriteNumber: false,
+      favouriteNumber: '',
     };
     // this.setFavorite = this.setFavorite.bind(this);
   }
 
   render() {
     const { favouriteNumber } = this.state; // je le lis
-    const foundPrediction = data.find((currentValue) => currentValue.number === favouriteNumber);
+    const foundPrediction = data.find((currentValue) => (
+      currentValue.number === parseInt(favouriteNumber) || currentValue.text === favouriteNumber
+    ));
+    console.log(foundPrediction);
 
+    // const message = foundPrediction ? founcPreiction.sentence : 'Je ne vois rien' ;
     let message;
     if (foundPrediction) {
       message = foundPrediction.sentence;
@@ -24,6 +28,7 @@ class App extends React.Component {
     else {
       message = 'Je ne vois rien';
     }
+    console.log(message);
 
     // je prepare la fonction qui sait modifier le state
     const setFavoriteNumber = (newValue) => {
@@ -42,8 +47,9 @@ class App extends React.Component {
           // je diffuse ma fonction qui sait modifier le state
           setFavoriteNumber={setFavoriteNumber}
           listOfNumber={data}
+          favouriteNumber={favouriteNumber}
         />
-        {typeof favouriteNumber === 'number' && <Infos number={favouriteNumber} />}
+        { message !== 'Je ne vois rien' && <Infos number={foundPrediction.number} />}
 
       </div>
     );
