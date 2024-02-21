@@ -29,6 +29,7 @@ class App extends React.Component {
     const setFavoriteNumber = (newValue) => {
       this.setState({
         favouriteNumber: newValue,
+
       });
     };
 
@@ -38,7 +39,7 @@ class App extends React.Component {
         <Form
          // je diffuse le state via les props pour parametrer mon affichage en fonction de sa valeur
           prediction={message}
-          // je diffuse ma foonction qui sait modifier le state
+          // je diffuse ma fonction qui sait modifier le state
           setFavoriteNumber={setFavoriteNumber}
           listOfNumber={data}
         />
